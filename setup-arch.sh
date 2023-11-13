@@ -6,6 +6,9 @@ USERNAME=whoami
 
 echo -e "Hola $USERNAME, vamos a iniciar/n"
 
+echo -e "installing kitty terminal"
+yes | sudo pacman -S kitty
+
 echo "installing neofetch. /n"
 if [ -f "$ISNEOFETCH" ]; then
     echo -e "neofetch already exist"
