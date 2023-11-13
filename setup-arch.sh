@@ -48,6 +48,18 @@ yes | sudo pacman -S kitty
 echo -e "installing dolphin file manager"
 yes | sudo pacman -S dolphin
 
+git clone https://aur.archlinux.org/snapd.git
+cd snapd
+yes | makepkg -si
+cd ..
+yes | sudo rm -r snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install snap-store
+export PATH=$PATH:/var/lib/snapd/snap/bin 
+# install vscode official
+bash | yes | sudo snap install code --classic
+
 fi
 
 # hyprland
