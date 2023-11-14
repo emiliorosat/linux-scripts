@@ -42,9 +42,10 @@ yes | sudo pacman -S vulkan-intel
 yes | sudo pacman -S wayland
 
 
-echo "/n Install Gnome? Yes/No/n"
+echo "\nInstall Gnome? Yes/No\n"
+read
 if [[ $s1 -eq "yes" || $s1 -eq "y" ]] then
-    #sudo pacman -S xorg xorg-server
+    sudo pacman -S xorg xorg-server xorg-xwayland
     sudo pacman -S gnome
     sudo pacman -S gnome-tweaks
     yes |  sudo packman -R epiphany
@@ -52,6 +53,9 @@ if [[ $s1 -eq "yes" || $s1 -eq "y" ]] then
 
 echo -e "installing kitty terminal"
 yes | sudo pacman -S kitty
+
+yes | sudo pacman -S ly
+sudo systemctl enable ly.service
 
 #echo -e "installing dolphin file manager"
 #yes | sudo pacman -S dolphin
@@ -63,6 +67,7 @@ cd ..
 yes | sudo rm -r snapd
 sudo systemctl enable --now snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
+bash
 sudo snap install snap-store
 export PATH=$PATH:/var/lib/snapd/snap/bin 
 # install vscode official
@@ -71,6 +76,7 @@ bash | yes | sudo snap install code --classic
 fi
 
 
+systemctl reboot
 
 
 
