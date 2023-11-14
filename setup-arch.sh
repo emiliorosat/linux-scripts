@@ -6,6 +6,8 @@ USERNAME=whoami
 
 echo -e "Hola $USERNAME, vamos a iniciar/n"
 
+yes | pacman -S zsh
+
 echo "installing neofetch. /n"
 if [ -f "$ISNEOFETCH" ]; then
     echo -e "neofetch already exist"
@@ -14,17 +16,17 @@ else
 fi
 # fill bashrc files
 echo "neofetch" >> ~/.bashrc
+echo "neofetch" >> ~/.zshrc
 
 echo "installing yay. /n"
 if [ -f "$ISYAY" ]; then
     echo -e "Yay already exist"
 else 
-    mkdir yaytempinstall && cd yaytempinstall
     git clone https://aur.archlinux.org/yay.git
     cd yay
     yes | makepkg -si
-    cd ../..
-    sudo rm -r yaytempinstall
+    cd ..
+    sudo rm -r yay
 fi
 
 # install nvm
@@ -39,14 +41,14 @@ if [[ $s1 -eq "yes" || $s1 -eq "y" ]] then
     sudo pacman -S xorg xorg-server
     sudo pacman -S gnome
     sudo pacman -S gnome-tweaks
-    yes |  sudo packman -R nautilus epiphany
-
+    yes |  sudo packman -R epiphany
+# nautilus # gnome file manager
 
 echo -e "installing kitty terminal"
 yes | sudo pacman -S kitty
 
-echo -e "installing dolphin file manager"
-yes | sudo pacman -S dolphin
+#echo -e "installing dolphin file manager"
+#yes | sudo pacman -S dolphin
 
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
@@ -61,6 +63,10 @@ export PATH=$PATH:/var/lib/snapd/snap/bin
 bash | yes | sudo snap install code --classic
 
 fi
+
+
+
+
 
 # hyprland
 #yay -S gdb ninja gcc cmake meson libxcb xcb-proto xcb-util xcb-util-keysyms libxfixes libx11 libxcomposite xorg-xinput libxrender pixman wayland-protocols cairo pango seatd libxkbcommon xcb-util-wm xorg-xwayland libinput libliftoff libdisplay-info cpio
