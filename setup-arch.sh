@@ -2,21 +2,49 @@
 
 ISNEOFETCH=/sbin/neofetch
 ISYAY=/sbin/yay
+ISGIT=/sbin/git
+ISVIM=/sbin/nvim
+ISWGET=/sbin/wget
 USERNAME=whoami
 
 echo -e "Hola $USERNAME, vamos a iniciar/n"
 
-yes | pacman -S zsh
+echo "\n\nInstalling git. \n"
+if [ -f "$ISGIT" ]; then
+    echo -e "already exist"
+else 
+    yes | sudo pacman -S git
+fi
 
-echo "installing neofetch. /n"
+echo "\n\nInstalling neovim \n"
+if [ -f "$ISVIM" ]; then
+    echo -e "already exist"
+else 
+    yes | sudo pacman -S neovim
+fi
+
+echo "\n\nInstalling wget \n"
+if [ -f "$ISWGET" ]; then
+    echo -e "already exist"
+else 
+    yes | sudo pacman -S wget
+fi
+
+yes | pacman -S zsh
+zsh
+yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+echo "\ninstalling neofetch.\n"
 if [ -f "$ISNEOFETCH" ]; then
-    echo -e "neofetch already exist"
+    echo -e "already exist"
 else 
     yes | sudo pacman -S neofetch
+    # fill bashrc files
+    echo "neofetch" >> ~/.bashrc
+    echo "neofetch" >> ~/.zshrc
 fi
-# fill bashrc files
-echo "neofetch" >> ~/.bashrc
-echo "neofetch" >> ~/.zshrc
+
 
 echo "installing yay. /n"
 if [ -f "$ISYAY" ]; then
@@ -43,35 +71,38 @@ yes | sudo pacman -S wayland
 
 
 echo "\nInstall Gnome? Yes/No\n"
-read
-if [[ $s1 -eq "yes" || $s1 -eq "y" ]] then
+read GNOME
+if [[ $GNOME -eq "yes" || $GNOME -eq "y" ]] then
     sudo pacman -S xorg xorg-server xorg-xwayland
     sudo pacman -S gnome
     sudo pacman -S gnome-tweaks
     yes |  sudo packman -R epiphany
-# nautilus # gnome file manager
+    # nautilus # gnome file manager
+    sudo systemctl enable gdm.service
 
-echo -e "installing kitty terminal"
-yes | sudo pacman -S kitty
+    echo -e "installing kitty terminal"
+    yes | sudo pacman -S kitty
 
-yes | sudo pacman -S ly
-sudo systemctl enable ly.service
+    #yes | sudo pacman -S ly
+    #sudo systemctl enable ly.service
 
-#echo -e "installing dolphin file manager"
-#yes | sudo pacman -S dolphin
+    #echo -e "installing dolphin file manager"
+    #yes | sudo pacman -S dolphin
 
-git clone https://aur.archlinux.org/snapd.git
-cd snapd
-yes | makepkg -si
-cd ..
-yes | sudo rm -r snapd
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap
-bash
-sudo snap install snap-store
-export PATH=$PATH:/var/lib/snapd/snap/bin 
-# install vscode official
-bash | yes | sudo snap install code --classic
+    git clone https://aur.archlinux.org/snapd.git
+    cd snapd
+    yes | makepkg -si
+    cd ..
+    yes | sudo rm -r snapd
+    sudo systemctl enable --now snapd.socket
+    sudo ln -s /var/lib/snapd/snap /snap
+    
+    bash
+    #sudo snap install snap-store
+    export PATH=$PATH:/var/lib/snapd/snap/bin 
+    
+    # install vscode official
+    bash | yes | sudo snap install code --classic
 
 fi
 
