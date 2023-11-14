@@ -36,9 +36,15 @@ git clone https://github.com/nvm-sh/nvm && cd nvm
 cd ..
 yes | sudo rm -r nvm
 
+yes | sudo pacman -S mesa
+yes | sudo pacman -S xf86-video-intel
+yes | sudo pacman -S vulkan-intel
+yes | sudo pacman -S wayland
+
+
 echo "/n Install Gnome? Yes/No/n"
 if [[ $s1 -eq "yes" || $s1 -eq "y" ]] then
-    sudo pacman -S xorg xorg-server
+    #sudo pacman -S xorg xorg-server
     sudo pacman -S gnome
     sudo pacman -S gnome-tweaks
     yes |  sudo packman -R epiphany
@@ -63,6 +69,7 @@ export PATH=$PATH:/var/lib/snapd/snap/bin
 bash | yes | sudo snap install code --classic
 
 fi
+
 
 
 
