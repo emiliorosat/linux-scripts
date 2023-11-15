@@ -7,5 +7,9 @@ export GOROOT=/usr/local/bin/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:GOROOT/bin:$PATH
 
+
+# Alias
+#alias lsa="ls -a"
+
 # execute
 neofetch
