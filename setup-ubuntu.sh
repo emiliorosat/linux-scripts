@@ -51,11 +51,18 @@ if [ $Q1 -eq "yes" || $Q1 -eq "y"]; then
 ## export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 ## [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+    sudo apt install vlc -y
+
     cat $FILE >> ~/.bashrc
     cat $FILE >> ~/.zshrc
     cat $FILE >> ~/.bash_profile
 
     sudo apt remove gnome-terminal -y
+    sudo apt remove gnome-calendar -y
+    sudo apt remove gnome-music -y
+    sudo apt remove totem -y
     sudo apt remove seahorse -y # like 1password
+    #sudo apt remove firefox -y
+    #sudo snap remove firefox
 
 fi
