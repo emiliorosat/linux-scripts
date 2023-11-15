@@ -9,13 +9,6 @@ USERNAME=whoami
 
 echo -e "Hola $USERNAME, vamos a iniciar/n"
 
-echo "\n\nInstalling git. \n"
-if [ -f "$ISGIT" ]; then
-    echo -e "already exist"
-else 
-    yes | sudo pacman -S git
-fi
-
 echo "\n\nInstalling neovim \n"
 if [ -f "$ISVIM" ]; then
     echo -e "already exist"

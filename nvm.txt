@@ -1,0 +1,11 @@
+#nvm config
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# golang config
+export GOROOT=/usr/local/bin/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:GOROOT/bin:$PATH
+
+# execute
+neofetch
