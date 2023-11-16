@@ -2,13 +2,13 @@
 
 CURL=/usr/bin/curl
 WGET=/usr/bin/wget
-FILE=./nvm.txt
+FILE=./_rc.txt
 
 
 
 echo "Desea realizar la instalacion inicial? (yes / no)"
 read Q1
-if [ $Q1 -eq "yes" || $Q1 -eq "y"]; then
+if [[ $Q1 -eq "yes" || $Q1 -eq "y" ]]; then
 
     sudo apt update -y
     sudo apt install neofetch -y
@@ -17,23 +17,27 @@ if [ $Q1 -eq "yes" || $Q1 -eq "y"]; then
     sudo apt install zsh -y
     sudo apt install gnome-tweaks -y
     sudo apt install python3-pip -y
-    zsh
+    sudo apt install gnome-shell-extensions -y
+    
 
     if [ -f "$CURL" ]; then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash -y
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash 
+        
         curl -O https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
     else
         sudo apt install curl -y
 
         if [ -f "$WGET" ]; then
             sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+            echo "WGET NVM"
             wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            
             wget https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
         fi
     fi
     
-
+    2 | zsh
 
     sudo tar -xvf go1.21.4.linux-amd64.tar.gz
     sudo mv go /usr/local/bin
@@ -56,6 +60,8 @@ if [ $Q1 -eq "yes" || $Q1 -eq "y"]; then
     cat $FILE >> ~/.bashrc
     cat $FILE >> ~/.zshrc
     cat $FILE >> ~/.bash_profile
+    
+     chsh -s $(which zsh)   
 
     sudo apt remove gnome-terminal -y
     sudo apt remove gnome-calendar -y
@@ -65,4 +71,4 @@ if [ $Q1 -eq "yes" || $Q1 -eq "y"]; then
     #sudo apt remove firefox -y
     #sudo snap remove firefox
 
-fi
+fiv
