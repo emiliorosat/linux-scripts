@@ -18,6 +18,8 @@ if [[ $Q1 -eq "yes" || $Q1 -eq "y" ]]; then
     sudo apt install gnome-tweaks -y
     sudo apt install python3-pip -y
     sudo apt install gnome-shell-extensions -y
+
+    yes | zsh
     
 
     if [ -f "$CURL" ]; then
